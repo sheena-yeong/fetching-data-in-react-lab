@@ -7,19 +7,19 @@ function StarshipSearch({
   setDisplayedStarships,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [btnDisplay, setBtnDisplay] = useState("hidden");
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     searchStarships(searchTerm);
-    if (searchTerm) setBtnDisplay("visible");
+    if (searchTerm) setIsVisible(true);
   };
 
   const handleReset = (e) => {
     e.preventDefault();
     setDisplayedStarships(starshipsData);
     setSearchTerm("")
-    setBtnDisplay("hidden")
+    setIsVisible(false)
   };
 
   return (
@@ -38,9 +38,9 @@ function StarshipSearch({
           />
         </label>
         <button type="submit">Search</button>
-        <button className={btnDisplay} onClick={handleReset}>
+        {isVisible && <button onClick={handleReset}>
           Show all starships
-        </button>
+        </button>}
       </form>
     </>
   );
